@@ -50,4 +50,20 @@ public class ProductController {
 
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity findProductById(@PathVariable Long id) {
+
+        var product = productService.findProductById(id);
+        if (!product.isPresent()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        try {
+            return ResponseEntity.ok().body(product.get());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+
+    }
+
 }
