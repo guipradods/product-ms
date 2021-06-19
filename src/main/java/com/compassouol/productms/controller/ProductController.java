@@ -66,4 +66,16 @@ public class ProductController {
 
     }
 
+    @GetMapping()
+    public ResponseEntity findAllProducts() {
+
+        try {
+            var products = productService.findAllProducts();
+            return ResponseEntity.ok().body(products);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+
+    }
+
 }
