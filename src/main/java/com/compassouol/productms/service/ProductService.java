@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
 public class ProductService {
@@ -20,4 +22,26 @@ public class ProductService {
         productRepository.save(newProduct);
         return newProduct;
     }
+
+    public Optional<Product> findProductById(Long id) {
+        var product = productRepository.findById(id);
+        return product;
+    }
+
+    public Product updateProduct(Optional<Product> product, ProductDTO productDTO) {
+
+        return product.map(products -> {
+            products.setName(productDTO.getName());
+            products.setDescription(productDTO.getDescription());
+            products.setPrice(productDTO.getPrice());
+            Product updated = saveProduct(products);
+            return updated;
+        }).orElse(product.get());
+
+    }
+
+    public Product saveProduct(Product product) {
+        return productRepository.save(product);
+    }
+
 }

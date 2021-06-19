@@ -24,14 +24,14 @@ public class Product {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotNull
     private String name;
 
-    @NotBlank
+    @NotNull
     private String description;
 
-    @NotBlank
     @Positive
+    @NotNull
     private Double price;
 
 }
