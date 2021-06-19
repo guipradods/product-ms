@@ -78,4 +78,19 @@ public class ProductController {
 
     }
 
+    @GetMapping("/search")
+    public ResponseEntity findFilteredProducts(@RequestParam(required = false) String q,
+                                               @RequestParam(required = false) Double min_price,
+                                               @RequestParam(required = false) Double max_price) {
+
+        var products = productService.findFilteredProducts(q, min_price, max_price);
+
+        try {
+            return ResponseEntity.ok().body(products);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+
+    }
+
 }

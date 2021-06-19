@@ -52,4 +52,7 @@ public class ProductService {
 
     }
 
+    public List<Product> findFilteredProducts(String q, Double min_price, Double max_price) {
+        return productRepository.findProductsByFilter(q, min_price, max_price);
+    }
 }
