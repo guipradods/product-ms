@@ -1,5 +1,6 @@
 package com.compassouol.productms.model.dto;
 
+import com.compassouol.productms.messages.ErrorMessages;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,14 +15,14 @@ import javax.validation.constraints.Positive;
 @Builder
 public class ProductDTO {
 
-    @NotNull
+    @NotNull(message = ErrorMessages.EMPTY_NAME)
     private String name;
 
-    @NotNull
+    @NotNull(message = ErrorMessages.EMPTY_DESCRIPTION)
     private String description;
 
-    @Positive
-    @NotNull
+    @Positive(message = ErrorMessages.INVALID_PRICE)
+    @NotNull(message = ErrorMessages.EMPTY_PRICE)
     private Double price;
 
 }
