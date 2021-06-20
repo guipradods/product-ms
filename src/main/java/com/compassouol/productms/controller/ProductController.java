@@ -34,7 +34,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+    public ResponseEntity updateProduct(@PathVariable Long id, @Valid @RequestBody ProductDTO productDTO) {
 
         var product = productService.findProductById(id);
         if (!product.isPresent()) {
@@ -55,7 +55,7 @@ public class ProductController {
 
         var product = productService.findProductById(id);
         if (!product.isPresent()) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.notFound().build();
         }
 
         try {
@@ -98,7 +98,7 @@ public class ProductController {
 
         var product = productService.findProductById(id);
         if (!product.isPresent()) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.notFound().build();
         }
 
         try {
