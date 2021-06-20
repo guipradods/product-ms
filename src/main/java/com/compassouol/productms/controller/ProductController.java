@@ -93,4 +93,21 @@ public class ProductController {
 
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteProduct(@PathVariable Long id) {
+
+        var product = productService.findProductById(id);
+        if (!product.isPresent()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        try {
+            productService.deleteProduct(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+
+    }
+
 }
